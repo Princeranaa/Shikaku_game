@@ -1,7 +1,3 @@
-// Generate a 5x5 Shikaku board with exactly 8 numbers placed correctly, ensuring valid rectangles
-
-
-// UI logic for selecting and validating rectangles
 let selectedCells = [];
 let boardData;
 
@@ -12,11 +8,11 @@ socket.on("updateBoard", (board) => {
     renderBoard(board);
 });
 
-// Request a new game board from the server
 socket.emit("newGame");
 
 document.getElementById("newGame").addEventListener("click", () => {
     socket.emit("newGame");
+    clearSelection(); 
 });
 
 function renderBoard(board) {
@@ -43,12 +39,20 @@ function renderBoard(board) {
 
 function selectCell(row, col) {
     let cell = boardData[row][col];
+    let cellElement = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+    
+    // If clicking an already selected area, clear the selection
+    if (cellElement.classList.contains("selected")) {
+        clearSelection();
+        return; 
+    }
+    
     if (cell > 0) {
         selectedCells = [{ row, col, value: cell }];
-        document.querySelector(`[data-row='${row}'][data-col='${col}']`).classList.add("selected");
+        cellElement.classList.add("selected");
     } else if (selectedCells.length > 0) {
         selectedCells.push({ row, col });
-        document.querySelector(`[data-row='${row}'][data-col='${col}']`).classList.add("selected");
+        cellElement.classList.add("selected");
         validateSelection();
     }
 }
@@ -58,8 +62,15 @@ function validateSelection() {
         let numberCell = selectedCells[0];
         let expectedArea = numberCell.value;
         if (selectedCells.length === expectedArea) {
+            let minRow = Math.min(...selectedCells.map(c => c.row));
+            let maxRow = Math.max(...selectedCells.map(c => c.row));
+            let minCol = Math.min(...selectedCells.map(c => c.col));
+            let maxCol = Math.max(...selectedCells.map(c => c.col));
+            
             selectedCells.forEach(({ row, col }) => {
-                document.querySelector(`[data-row='${row}'][data-col='${col}']`).classList.add("filled");
+                let cellElement = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+                cellElement.classList.add("bordered"); 
+
             });
             selectedCells = [];
             checkWinCondition();
@@ -71,15 +82,15 @@ function validateSelection() {
 }
 
 function clearSelection() {
-    selectedCells.forEach(({ row, col }) => {
-        document.querySelector(`[data-row='${row}'][data-col='${col}']`).classList.remove("selected");
+    document.querySelectorAll(".selected, .bordered").forEach(cell => {
+        cell.classList.remove("selected", "bordered");
     });
     selectedCells = [];
 }
 
 function checkWinCondition() {
     let totalNeededCells = boardData.flat().reduce((sum, cell) => sum + (cell > 0 ? cell : 0), 0);
-    let filledCellsCount = document.querySelectorAll(".filled").length;
+    let filledCellsCount = document.querySelectorAll(".bordered").length;
     
     if (filledCellsCount === totalNeededCells) {
         alert("Congratulations! You have completed the Shikaku puzzle.");

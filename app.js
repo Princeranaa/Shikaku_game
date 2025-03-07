@@ -16,7 +16,7 @@ io.on("connection", (socket) => {
     console.log("userconnected", socket.id);
     
     socket.emit("updateBoard", boardData);
-
+    
     socket.on("newGame", () => {
         boardData = generateShikakuBoard(5);
         io.emit("updateBoard", boardData);

@@ -2,25 +2,24 @@ function generateShikakuBoard(size) {
     let board = Array(size).fill(null).map(() => Array(size).fill(0));
     let numbers = [2, 2, 4, 4, 4, 3, 3, 3]; // Ensure 8 numbers are placed
     let placedNumbers = 0;
-    let maxAttempts = 100; // Limit the number of retries
+    let maxAttempts = 100; 
 
     function canPlaceRectangle(row, col, w, h) {
-        if (row + h > size || col + w > size) return false; // Out of bounds
-
+        if (row + h > size || col + w > size) return false; 
         for (let r = row; r < row + h; r++) {
             for (let c = col; c < col + w; c++) {
-                if (board[r][c] !== 0) return false; // Space already occupied
+                if (board[r][c] !== 0) return false; 
             }
         }
         return true;
     }
 
     function placeRectangle(row, col, w, h, value) {
-        board[row][col] = value; // Place the number
+        board[row][col] = value; 
         for (let r = row; r < row + h; r++) {
             for (let c = col; c < col + w; c++) {
                 if (r !== row || c !== col) {
-                    board[r][c] = -1; // Mark rectangle space
+                    board[r][c] = -1; 
                 }
             }
         }
@@ -46,16 +45,13 @@ function generateShikakuBoard(size) {
             placeRectangle(row, col, w, h, area);
             placedNumbers++;
         }
-
         maxAttempts--;
     }
 
-    // If the board is not solvable, restart generation
     if (placedNumbers < 8) {
         return generateShikakuBoard(size);
     }
 
-    // Remove the -1 markers, leaving only numbers (user must fill in rectangles)
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
             if (board[i][j] === -1) board[i][j] = 0;
