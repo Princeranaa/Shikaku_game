@@ -1,4 +1,4 @@
-/* Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ html, body {
     justify-content: center;
 }
 
-/* Main container */
+
 .container {
     text-align: center;
     padding: 20px;
@@ -26,13 +26,13 @@ html, body {
     width: 90%;
 }
 
-/* Title */
+
 h1 {
     margin-bottom: 16px;
     color: #333;
 }
 
-/* Game message */
+
 .game-message {
     color: green;
     margin-bottom: 15px;
@@ -41,7 +41,6 @@ h1 {
     font-weight: 600;
 }
 
-/* Controls */
 .controls {
     display: flex;
     justify-content: center;
@@ -50,7 +49,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Button */
+
 .btn {
     padding: 10px 18px;
     background: #4f46e5;
@@ -66,7 +65,7 @@ h1 {
     background: #4338ca;
 }
 
-/* Dropdown */
+
 .dropdown {
     padding: 10px 14px;
     border: 1px solid #ccc;
@@ -74,7 +73,7 @@ h1 {
     font-size: 16px;
 }
 
-/* Game Grid */
+
 .grid {
     display: grid;
     justify-content: center;
@@ -82,7 +81,7 @@ h1 {
     margin: 0 auto;
 }
 
-/* Individual Cells */
+
 .cell {
     width: 45px;
     height: 45px;
@@ -103,19 +102,19 @@ h1 {
     background: #d1d5db;
 }
 
-/* Selected Cell */
+
 .selected {
     background: #fde047;
     border: 2px solid #000;
 }
 
-/* Rectangle Borders */
+
 .border-top { border-top: 3px solid black; }
 .border-bottom { border-bottom: 3px solid black; }
 .border-left { border-left: 3px solid black; }
 .border-right { border-right: 3px solid black; }
 
-/* Responsive Grid Sizing */
+
 :root {
     --grid-size: 7; 
 }
@@ -125,8 +124,6 @@ h1 {
     justify-content: center;
     gap: 5px;
 }
-
-
 
 .grid {
     grid-template-columns: repeat(var(--grid-size), 45px);
@@ -139,7 +136,6 @@ h1 {
 }
 
 
-/* Mobile Responsive */
 @media (max-width: 480px) {
     .cell {
         width: 36px;

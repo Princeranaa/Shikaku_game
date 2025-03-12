@@ -142,13 +142,9 @@ socket.on("updateBoard", ({ board, size }) => {
     renderBoard(board);
     setMessage("Game started! Select rectangles.", "blue");
 
-    // ✅ Dynamically set dropdown value to match board size
     document.getElementById("gridSize").value = size;
 });
 
-
-
-// Prevent form submission and emit event instead
 document.getElementById("gridSize").addEventListener("change", () => {
     let size = document.getElementById("gridSize").value;
     socket.emit("newGame", size);
@@ -156,7 +152,6 @@ document.getElementById("gridSize").addEventListener("change", () => {
     setMessage("New game created! Select rectangles.", "blue");
 });
 
-// Button to generate a new game
 document.getElementById("newGame").addEventListener("click", () => {
     let size = document.getElementById("gridSize").value;
     socket.emit("newGame", size);
@@ -257,3 +252,6 @@ function setMessage(message, color = "black") {
     messageEl.innerText = message;
     messageEl.style.color = color;
 }
+
+
+
