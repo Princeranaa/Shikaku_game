@@ -259,7 +259,7 @@ function generateShikakuBoard(size) {
       }
 
       if (placedNumbers === areas.length) {
-          // Clean up -1 marks and return board if success
+          
           for (let i = 0; i < size; i++) {
               for (let j = 0; j < size; j++) {
                   if (board[i][j] === -1) board[i][j] = 0;

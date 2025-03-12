@@ -117,13 +117,12 @@ h1 {
 
 /* Responsive Grid Sizing */
 :root {
-    --grid-size: 5; /* Default grid size */
+    --grid-size: 7; 
 }
 
 .inputfileds{
     display: flex;
     justify-content: center;
-    /* margin-top: 10px; */
     gap: 5px;
 }
 

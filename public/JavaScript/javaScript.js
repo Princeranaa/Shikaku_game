@@ -168,7 +168,7 @@ function renderBoard(board) {
     const grid = document.getElementById("game-board");
     grid.innerHTML = "";
     const size = board.length;
-    let cellSize = size >= 8 ? "35px" : "50px";
+    let cellSize = size >= 8 ? "50px" : "50px";
 
     grid.style.setProperty('--grid-size', size);
     grid.style.setProperty('grid-template-columns', `repeat(${size}, ${cellSize})`);
